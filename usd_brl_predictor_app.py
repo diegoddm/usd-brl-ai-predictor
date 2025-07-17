@@ -114,7 +114,8 @@ def fetch_and_classify_news():
             ))
             conn.commit()
     conn.close()
-    return resultsimport matplotlib.pyplot as plt
+    return results
+    import matplotlib.pyplot as plt
 from streamlit_autorefresh import st_autorefresh
 
 load_dotenv()
