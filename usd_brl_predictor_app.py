@@ -133,7 +133,7 @@ st_autorefresh(interval=60 * 60 * 1000)
 with st.spinner("📥 Loading hourly USD/BRL data..."):
     data = get_hourly_data()
 
-st.subheader("📉 Hourly USD/BRL Exchange Rate")
+st.subheader("📉 Diego - Hourly USD/BRL Exchange Rate")
 st.subheader("📈 USD to BRL - Last 7 Days (Hourly)")
 
 if data.empty or 'Close' not in data.columns:
