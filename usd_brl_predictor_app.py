@@ -19,9 +19,13 @@ from googletrans import Translator
 # Preprocess
 def get_hourly_data(ticker="USDBRL=X", period="7d", interval="1h"):
     df = yf.download(ticker, period=period, interval=interval)
-    df = df[['Close']].dropna()
+    if 'Close' not in df.columns or df.empty:
+        return pd.DataFrame(columns=["Close"])
+    df = df[['Close']].copy()
     df.index = pd.to_datetime(df.index)
     return df
+
+
 
 # Model
 def build_and_train(data, seq_len=60, epochs=5):
@@ -130,6 +134,12 @@ with st.spinner("📥 Loading hourly USD/BRL data..."):
     data = get_hourly_data()
 
 st.subheader("📉 Hourly USD/BRL Exchange Rate")
+st.subheader("📈 USD to BRL - Last 7 Days (Hourly)")
+
+if data.empty or 'Close' not in data.columns:
+    st.error("⚠️ No data available for USD/BRL. Please try again later.")
+else:
+st.line_chart(data['Close'])
 st.line_chart(data)
 
 # Cache model training
