@@ -148,7 +148,8 @@ def build_model_cached(data):
 
 # Train model and predict next price
 with st.spinner("🤖 Training LSTM model and predicting next value..."):
-    model, scaler = build_model_cached(data.values)
+   #model, scaler = build_model_cached(data.values)
+    model, scaler = build_model_cached(data.values.reshape(-1, 1))
     prediction = predict_next(model, scaler, data.values)
 
 current = data['Close'].iloc[-1]
