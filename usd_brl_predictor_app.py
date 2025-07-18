@@ -69,7 +69,7 @@ st.title("💸 USD to BRL AI Price Predictor")
 
 try:
     data = get_hourly_data()
-    st.subheader("Diego - Historical USD/BRL Exchange Rate (Hourly)")
+    st.subheader("Historical USD/BRL Exchange Rate (Hourly)")
     st.line_chart(data['Close'])
 
     st.write("Latest value:", round(data['Close'].iloc[-1], 4))
@@ -85,3 +85,53 @@ try:
 
 except Exception as e:
     st.error(f"App crashed: {e}")
+
+
+
+import matplotlib.pyplot as plt
+import pandas as pd
+import numpy as np
+import streamlit as st
+from datetime import datetime, timedelta
+
+st.subheader("📉 Forecast vs Actual for USD/BRL – Next 3 Months")
+
+# Simulated prediction (replace with real model outputs if available)
+future_days = pd.date_range(datetime.today(), periods=90, freq='D')
+predicted = np.sin(np.linspace(0, 3 * np.pi, 90)) + 5.0 + np.random.normal(0, 0.1, 90)
+actual = predicted + np.random.normal(0, 0.2, 90)
+
+# Prediction bands (you could use model confidence intervals instead)
+predicted_low = predicted - 0.15
+predicted_high = predicted + 0.15
+
+# Classification of actual vs predicted range
+markers = []
+for act, low, high in zip(actual, predicted_low, predicted_high):
+    if act < low:
+        markers.append("below")
+    elif act > high:
+        markers.append("above")
+    else:
+        markers.append("within")
+
+# Plot
+fig, ax = plt.subplots(figsize=(14, 6))
+ax.plot(future_days, predicted, label="Predicted", color="blue")
+ax.fill_between(future_days, predicted_low, predicted_high, color="blue", alpha=0.2, label="Prediction Range")
+ax.plot(future_days, actual, label="Actual", color="black", linestyle="--", linewidth=1)
+
+for i in range(len(future_days)):
+    if markers[i] == "below":
+        ax.plot(future_days[i], actual[i], 'ro', label='Actual Below Range' if i == 0 else "", markersize=5)
+    elif markers[i] == "above":
+        ax.plot(future_days[i], actual[i], 'go', label='Actual Above Range' if i == 0 else "", markersize=5)
+
+ax.set_title("Predicted vs Actual USD/BRL – 3-Month Forecast")
+ax.set_xlabel("Date")
+ax.set_ylabel("Exchange Rate")
+ax.grid(True)
+ax.legend()
+fig.autofmt_xdate()
+
+st.pyplot(fig)
