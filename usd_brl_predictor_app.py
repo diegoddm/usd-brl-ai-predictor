@@ -65,7 +65,7 @@ def classify_news(text):
     return result["labels"][0], result["scores"][0]
 
 # MAIN APP
-st.title("💸 USD to BRL AI Price Predictor")
+st.title("💸 DIEGO - USD to BRL AI Price Predictor")
 
 try:
     data = get_hourly_data()
