@@ -139,8 +139,7 @@ st.subheader("📈 USD to BRL - Last 7 Days (Hourly)")
 if data.empty or 'Close' not in data.columns:
     st.error("⚠️ No data available for USD/BRL. Please try again later.")
 else:
-st.line_chart(data['Close'])
-st.line_chart(data)
+    st.line_chart(data['Close'])
 
 # Cache model training
 @st.cache_resource
