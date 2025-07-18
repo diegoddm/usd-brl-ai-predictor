@@ -12,7 +12,7 @@ from keras.layers import Dense, LSTM
 import time
 
 st.set_page_config(layout="wide")
-st.title("USD/BRL AI Predictor")
+st.title("Diego USD/BRL AI Predictor V2")
 
 @st.cache_data(ttl=3600)
 def load_data():
