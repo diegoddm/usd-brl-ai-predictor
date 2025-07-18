@@ -2,12 +2,8 @@ streamlit
 yfinance
 pandas
 numpy
-scikit-learn
 matplotlib
-tensorflow==2.12.0
-feedparser
+scikit-learn
 transformers
-googletrans==4.0.0-rc1
-python-dotenv
-streamlit-autorefresh
-torch
+keras
+requests
