@@ -10,3 +10,4 @@ transformers
 googletrans==4.0.0-rc1
 python-dotenv
 streamlit-autorefresh
+torch
