@@ -69,7 +69,7 @@ st.title("💸 USD to BRL AI Price Predictor")
 
 try:
     data = get_hourly_data()
-    st.subheader("Historical USD/BRL Exchange Rate (Hourly)")
+    st.subheader("Diego - Historical USD/BRL Exchange Rate (Hourly)")
     st.line_chart(data['Close'])
 
     st.write("Latest value:", round(data['Close'].iloc[-1], 4))
